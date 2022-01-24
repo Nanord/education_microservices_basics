@@ -1,0 +1,28 @@
+#Todo Конструкция типа ${SERVICE_BASE_URL:/api/user-manager} позволяет брать переменную из среды окружения или дефолтную, если такая отсутсвует.
+#todo Конструкция типа @project.version@ берет переменную из pom.xml
+
+server:
+  port: 8080
+  #todo позволяет сменить базовый путь с / на /api/user-manager
+  #servlet:
+    #context-path: ${SERVICE_BASE_URL:/api/user-manager}
+spring:
+  application:
+    name: ${APPLICATION_NAME:user-manager}
+    version: @project.version@
+  datasource:
+    url: ${PG_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${PG_USER:postgres}
+    password: ${PG_PASSWORD:admin}
+    hikari:
+      schema: user_manager
+    flyway:
+      enabled: true
+      defaultSchema: user_manager
+      schemas: user_manager
+      createSchemas: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
